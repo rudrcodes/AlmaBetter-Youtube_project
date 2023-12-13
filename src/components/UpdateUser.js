@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
 import { API } from "../Backend";
+import { Button, Form } from "react-bootstrap";
 
 const UpdateUser = () => {
   const [id, setID] = useState("");
   const [name, setName] = useState("");
   const [subscribedChannel, setSubscribedChannel] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (id.length === 0) return alert("Enter id please");
     if (name.length == 0 || subscribedChannel.length == 0)
       return alert(
@@ -22,13 +24,13 @@ const UpdateUser = () => {
       console.log(res.data.updateRes);
       if (res.data.updateRes !== undefined) {
         let updateResID = await res.data.updateRes._id;
-        alert(`Updated user with id : ${updateResID}`);
+        alert(`🎊 Updated user with id : ${updateResID}`);
       }
       if (res.data.err !== undefined) {
         throw new Error();
       }
     } catch (error) {
-      alert("Please check the id entered");
+      alert(" 🌋 Please check the id entered");
       console.log(`Error : ${error}`);
     }
   };
@@ -38,15 +40,17 @@ const UpdateUser = () => {
       <div
         className="text-white"
         style={{
+          padding: "20px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "red",
+          backgroundColor: "#011C27",
           flexDirection: "column",
+          marginBottom: "20px",
+          borderRadius: "20px",
         }}
       >
         <h2>Update user : Enter the id of the user </h2>
-
         <div
           style={{
             display: "flex",
@@ -55,31 +59,48 @@ const UpdateUser = () => {
             flexDirection: "column",
           }}
         >
-          <input
-            placeholder="enter id"
-            type="text"
-            value={id}
-            onChange={(e) => setID(e.target.value)}
-          />
-          <input
-            placeholder="enter name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            placeholder="enter Subscribed Channel"
-            type="text"
-            value={subscribedChannel}
-            onChange={(e) => setSubscribedChannel(e.target.value)}
-          />
+          <Form
+            type="submit"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Enter ID</Form.Label>
+              <Form.Control
+                placeholder="enter id"
+                type="text"
+                value={id}
+                onChange={(e) => setID(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Enter Name</Form.Label>
+              <Form.Control
+                placeholder="enter name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
 
-          <button onClick={handleSubmit}>Submit</button>
-          {id}
-          <br />
-          {name}
-          <br />
-          {subscribedChannel}
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Enter Subscribed Channel</Form.Label>
+              <Form.Control
+                placeholder="enter Subscribed Channel"
+                type="text"
+                value={subscribedChannel}
+                onChange={(e) => setSubscribedChannel(e.target.value)}
+              />
+            </Form.Group>
+
+            <Button variant="success" type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Form>
         </div>
       </div>
     </div>

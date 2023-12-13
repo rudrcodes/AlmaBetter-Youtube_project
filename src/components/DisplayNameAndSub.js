@@ -17,9 +17,9 @@ const DisplayNameAndSub = () => {
           key={item.name}
         >
           <p className="text-success text-start p-2">
-            Name : {item.name}
+            <b>Name :</b>  {item.name}
             <br />
-            Subscribed Channel : {item.subscribedChannel}
+            <b>Subscribed Channel :</b> {item.subscribedChannel}
           </p>
         </div>
       ))}

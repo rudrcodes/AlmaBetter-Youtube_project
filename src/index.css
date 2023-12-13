@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(42, 45, 48);
 
-  
+
 }
 
 code {
@@ -23,16 +23,34 @@ code {
   height: 100%;
 }
 
-.homepage
-{
+.DisplayAllSubs button {
+  padding: 7px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 200ms ease-in-out;
+}
+
+.DisplayAllSubs button:hover {
+  background-color: gray;
+}
+
+.homepage {
   height: 100vh;
   margin: 10px;
 }
 
-.updateUser{
+.updateUser {
   /* display: flex;
   justify-content: center;
   align-items: center; */
   height: 100vh;
   margin: 10px;
+}
+
+.loadingHeading {
+  color: blanchedalmond;
+}
+
+.searchBTN{
+  margin-top: 10px;
 }

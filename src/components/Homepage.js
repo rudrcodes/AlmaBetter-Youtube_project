@@ -74,22 +74,12 @@ const Homepage = () => {
           <div className="col">
             <button
               type="button"
-              className="btn btn-danger"
-              onClick={() => navigate("UpdateUser")}
-            >
-              Update User
-            </button>
-          </div>
-          <div className="col">
-            <button
-              type="button"
               className="btn btn-primary"
               onClick={showDataSub}
             >
               All Subscriber Data
             </button>
           </div>
-
           {/* Button to show Subscriber name and channel */}
 
           <div className="col">
@@ -102,6 +92,15 @@ const Homepage = () => {
             </button>
           </div>
 
+          <div className="col">
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => navigate("UpdateUser")}
+            >
+              Update User
+            </button>
+          </div>
           {/* Search box for searching ID */}
 
           <div className="col">
@@ -114,15 +113,16 @@ const Homepage = () => {
               onChange={(event) => setId(event.target.value)}
               style={{
                 heigth: "1rem",
-                width: "15rem",
+                width: "17rem",
                 borderRadius: "0.5rem",
                 borderColor: "rgb(42, 45, 48)",
+                padding:"10px"
               }}
             />
-            <button type="submit" className="btn btn-danger" onClick={showIds}>
+            <button type="submit" className="btn btn-danger searchBTN" onClick={showIds}>
               Search
             </button>
-            {ids == undefined && <div>No user found</div>}
+            {ids == undefined && <div className="py-2">No user found</div>}
             {ids?.map((item) => (
               <div
                 className="card bg-dark m-3 p-1"

@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAllSubscriber } from "../Features/AllSubscriber";
 import { API } from "../Backend";
-console.log(API);
+
+
+console.log("api : ", API);
 
 const DisplayAllSubs = (id) => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const deleteFunc = async (id) => {
     try {
@@ -27,11 +30,13 @@ const DisplayAllSubs = (id) => {
   const [subs, setSubs] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     const fetchDataSub = async () => {
       let { data } = await axios.get(`${API}`);
       console.log(data);
       dispatch(setAllSubscriber(data));
       setSubs(data);
+      setLoading(false);
     };
     fetchDataSub();
   }, []);
@@ -39,7 +44,9 @@ const DisplayAllSubs = (id) => {
   return (
     <div className="DisplayAllSubs">
       <h1 className="text-success text-start p-2">All Subscriber Data : </h1>
-      {subs.length == 0 && (
+      {loading == true && <h3 className="loadingHeading">Fetching data....</h3>}
+
+      {loading == false && subs.length == 0 && (
         <div className="text-danger text-start p-2">
           {" "}
           Empty... Create some data
@@ -53,13 +60,13 @@ const DisplayAllSubs = (id) => {
           key={item._id}
         >
           <p className="text-success text-start p-2">
-            ID : {item._id}
+            <b> ID</b> : {item._id}
             <br />
-            Name : {item.name}
+            <b>Name :</b> {item.name}
             <br />
-            Subscribed Channel : {item.subscribedChannel}
+            <b> Subscribed Channel :</b> {item.subscribedChannel}
             <br />
-            Subscribed Date : {item.subscribedDate}
+            <b> Subscribed Date :</b> {item.subscribedDate}
           </p>
           <button onClick={() => deleteFunc({ id: item._id })}>Delete</button>
         </div>
